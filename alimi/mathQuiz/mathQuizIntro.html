@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Math Quiz</title>
+
+    <meta charset="UTF-8">
+    <style>
+      #header-one-div {
+        background-color: lightgrey;
+        margin-left: 400px;
+        position: relative;
+        border-style: solid;
+        padding-left: 5px;
+        width: 500px
+      }
+
+      #heading-one-shadow {
+        text-shadow: 2px 2px #8a94a3;
+        font-size: 35px;
+        text-align: center;
+      }
+
+      p {
+        font-size: 18px;
+        font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      }
+
+      #paragraph-number {
+        font-size: 20px;
+      }
+
+      #start-button {
+        background-color: #3bdb80;
+        border: medium outset #30a050;
+        font-size: 50px;
+        margin-left: 50px;
+        margin-top: 10px;
+        color: black;
+        text-decoration: none;
+      }
+
+      #arrow {
+        position: absolute;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!--title-->
+    <h1 id="header-one-div">Welcome to <i id="heading-one-shadow">THE MATH QUIZ!!!</i></h1>
+
+    <!--intro-->
+    <p>In this quiz, you will be asked <strong id="paragraph-number">5</strong> different questions about math.
+       As you progress, the questions will continue to get harder.<br>
+       If you get all of them right, you get a cookie!
+       If you fail, you will get a sad feeling inside that will never disappear. </p>
+
+    <h2>Are you ready to beggin?</h2>
+
+    <!--start button-->
+    <a href="mathQuizQuestion1.html" id="start-button">Start!</a>
+
+    <!--animated arrow-->
+    <img src="../images/arrow.png" alt="picture of an arrow" height=75 id="arrow">
+    <script>
+      //set variables
+      var arrowEl = document.getElementById("arrow");
+      var isVisible = true;
+
+      //make arrow blink function
+      var blinkingArrow = function() {
+        if (isVisible === true) {
+          arrowEl.style.visibility = "hidden";
+          isVisible = false;
+        } else {
+          arrowEl.style.visibility = "visible";
+          isVisible = true;
+        };
+      }
+
+      //call function every second
+      var timer = window.setInterval(blinkingArrow, 1000);
+    </script>
+  </body>
+</html>

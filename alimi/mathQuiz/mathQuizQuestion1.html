@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+      <title>Math Quiz - Question 1</title>
+
+      <meta charset="UTF-8">
+      <style>
+        h1 {
+          border: 5px outset #1d68e0;
+          width: 150px;
+          padding-left: 5px;
+          background-color: #68a2ff;
+        }
+
+        h2 {
+          font-size: 22px;
+        }
+
+        p {
+          font-size: 20px;
+          line-height: 50px;
+        }
+
+        #answer3 {
+          position: relative;
+          left: 40px;
+        }
+
+        #answer4 {
+          position: relative;
+          left: 40px;
+        }
+
+        button {
+          position: relative;
+          left: 10px;
+          font-size: 20px
+        }
+
+        .answers {
+          border-radius: 10px;
+          background-color: lightgrey;
+          padding-left: 3px;
+          padding-right: 3px;
+        }
+
+        .div-reply {
+          border-style: solid;
+          width: 280px;
+          height: 90px;
+          font-size: 75px;
+          text-align: center;
+          margin-left: 550px;
+          background-color: lightgreen;
+          position: absolute;
+        }
+
+        #next-question {
+          border-style: solid;
+          width: 180px;
+          height: 40px;
+          font-size: 30px;
+          margin-left: 10px;
+          text-align: center;
+          background-color: lightgreen;
+          position: absolute;
+        }
+      </style>
+  </head>
+  <body>
+    <!--header-->
+    <h1><em>Question 1</em></h1>
+
+    <!--questions-->
+    <h2>Which equation is equal to 10 more than the product of a number x and 13?</h2>
+    <h3><em>Choose one answer. Click on question to submit answer.</em></h3>
+
+    <!--answer buttons-->
+
+    <!--wrong answer-->
+    <p><button id="answer1" class="answers wrong-answer">10 + x/3</button>
+    <!--right answer-->
+    <button id="answer3" class="answers right-answer">10 + 3x</button><br>
+    <!--wrong answer-->
+    <button id="answer2" class="answers wrong-answer">3*10 + x</button>
+    <!--wrong answer-->
+    <button id="answer4" class="answers wrong-answer">3/x + 10</button></p>
+
+    <!--audio element-->
+    <audio id="winning-sound">
+      <source src="../sounds/TaDaSound.mp3" type="audio/mp3">
+    </audio>
+    
+    <script>
+      //wrong button code
+      var wrongButtonEl = document.getElementsByClassName("wrong-answer");
+      var nextQuestion = document.createElement("a");
+
+      var onWrongButtonClick = function() {
+        //wrong text code
+        var wrongText = document.createElement("div");
+        wrongText.textContent = "Wrong...";
+        wrongText.style.backgroundColor = "red";
+        wrongText.className = "div-reply";
+        document.body.appendChild(wrongText);
+      };
+
+      for (var i = 0; i < wrongButtonEl.length; i++) {
+        wrongButtonEl[i].addEventListener("click", onWrongButtonClick);
+      };
+
+      //right button code
+      var rightButtonEl = document.getElementsByClassName("right-answer");
+
+      var onRightButtonClick = function() {
+        var correctText = document.createElement("div");
+        correctText.textContent = "Correct!";
+        correctText.className = "div-reply";
+        document.body.appendChild(correctText);
+        //next question code
+        nextQuestion.id = "next-question";
+        nextQuestion.textContent = "Next question!";
+        nextQuestion.href = "mathQuizQuestion2.html";
+        nextQuestion.style.textDecoration = "none";
+        nextQuestion.style.color = "black";
+        document.body.appendChild(nextQuestion);
+        //play audio
+        var winningSound = document.getElementById("winning-sound");
+        winningSound.play();
+      }
+
+      for (var i = 0; i < rightButtonEl.length; i++) {
+        rightButtonEl[i].addEventListener("click", onRightButtonClick);
+      };
+    </script>
+  </body>
+</html>

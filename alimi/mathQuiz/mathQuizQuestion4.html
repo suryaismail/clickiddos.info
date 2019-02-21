@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+      <title>Math Quiz - Question 4</title>
+
+      <meta charset="UTF-8">
+      <style>
+        h1 {
+          border: 5px outset #1d68e0;
+          width: 150px;
+          padding-left: 5px;
+          background-color: #68a2ff;
+        }
+
+        h2 {
+          font-size: 22px;
+        }
+
+        p {
+          font-size: 20px;
+          line-height: 50px;
+        }
+
+        #answer3 {
+          position: relative;
+          left: 40px;
+        }
+
+        #answer4 {
+          position: relative;
+          left: 40px;
+        }
+
+        button {
+          position: relative;
+          left: 10px;
+          font-size: 20px
+        }
+
+        .answers {
+          border-radius: 10px;
+          background-color: lightgrey;
+          padding-left: 3px;
+          padding-right: 3px;
+          font-size: 30px;
+        }
+
+        .div-reply {
+          border-style: solid;
+          width: 280px;
+          height: 90px;
+          font-size: 75px;
+          text-align: center;
+          margin-left: 550px;
+          background-color: lightgreen;
+          position: absolute;
+        }
+
+        #next-question {
+          border-style: solid;
+          width: 180px;
+          height: 40px;
+          font-size: 30px;
+          margin-left: 10px;
+          text-align: center;
+          background-color: lightgreen;
+          position: absolute;
+        }
+
+        .h2-emphasis {
+          text-decoration: underline;
+        }
+      </style>
+  </head>
+  <body>
+    <!--header-->
+    <h1><em>Question 4</em></h1>
+
+    <!--change question and answers-->
+    <!--questions-->
+    <h2>What is the <em class="h2-emphasis">square root</em> of 49?</h2>
+    <h3><em>Choose one answer. Click on question to submit answer.</em></h3>
+
+    <!--answer buttons-->
+
+    <!--right answer-->
+    <p><button id="answer1" class="answers right-answer">7</button>
+    <!--wrong answer-->
+    <button id="answer3" class="answers wrong-answer">15</button><br>
+    <!--wrong answer-->
+    <button id="answer2" class="answers wrong-answer">3</button>
+    <!--wrong answer-->
+    <button id="answer4" class="answers wrong-answer">6</button></p>
+
+    <!--audio element-->
+    <audio id="winning-sound">
+      <source src="../sounds/TaDaSound.mp3" type="audio/mp3">
+    </audio>
+    
+    <script>
+      //wrong button code
+      var wrongButtonEl = document.getElementsByClassName("wrong-answer");
+      var nextQuestion = document.createElement("a");
+
+      var onWrongButtonClick = function() {
+        //wrong text code
+        var wrongText = document.createElement("div");
+        wrongText.textContent = "Wrong...";
+        wrongText.style.backgroundColor = "red";
+        wrongText.className = "div-reply";
+        document.body.appendChild(wrongText);
+      };
+
+      //add event listener to wrong buttons
+      for (var i = 0; i < wrongButtonEl.length; i++) {
+        wrongButtonEl[i].addEventListener("click", onWrongButtonClick);
+      };
+
+      //right button code
+      var rightButtonEl = document.getElementsByClassName("right-answer");
+
+      var onRightButtonClick = function(e) {
+        var correctText = document.createElement("div");
+        correctText.textContent = "Correct!";
+        correctText.className = "div-reply";
+        e.prevent
+        document.body.appendChild(correctText);
+        //next question code
+        nextQuestion.id = "next-question";
+        nextQuestion.textContent = "Next question!";
+        nextQuestion.href = "mathQuizQuestion5.html";
+        nextQuestion.style.textDecoration = "none";
+        nextQuestion.style.color = "black";
+        document.body.appendChild(nextQuestion);
+        //play audio
+        var winningSound = document.getElementById("winning-sound");
+        winningSound.play();
+      }
+
+      //add event listener to right buttons
+      for (var i = 0; i < wrongButtonEl.length; i++) {
+        rightButtonEl[i].addEventListener("click", onRightButtonClick);
+      };
+    </script>
+  </body>
+</html>

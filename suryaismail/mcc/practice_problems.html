@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+div {
+    background-color: lightgrey;
+    width: 500px;
+    font-family: "Courier New";
+    font-size: 16px
+  }
+</style>
+
+<script src="check.js"></script>
+
+<body>
+
+<h2>Practice MCC problems</h2>
+
+<h3>Problem 1</h3>
+Given a list of numbers stored in list arr. Output the sum of all numbers.
+</p>
+<div>
+arr = [22, 39, 68, 90, 22, 53, 80, 36, 16, 44, 48, 29, 13, 24, 51, 69, 99, 65, 58, 41, 68, 57, 66, 5, 44, 10, 23, 1, 24, 64, 29, 85, 6, 22, 51, 14, 98, 93, 71, 77, 100, 92, 62, 69, 76, 83, 19, 68, 75, 40, 16, 20, 47, 95, 60, 71, 34, 11, 80, 90, 14, 39, 69, 71, 18, 64, 63, 89, 57, 88, 52, 2, 71, 2, 71, 20, 12, 49, 97, 33, 43, 7, 30, 37, 8, 83, 9, 68, 96, 72, 99, 21, 53, 68, 25, 71, 2, 31, 65, 69]
+</div>
+</p>
+<input type="text" id="input1" value="">
+
+<button onclick="check1()">Submit</button>
+</p>
+<hr>
+
+<h3>Problem 2</h3>
+We start with the Fizz Buzz programming challenge. Your task is to write a program that prints numbers from S to E (inclusive of both S and E). But for multiples of 3, print Fizz instead of that number and for multiples of 5, print Buzz. For numbers which are both multiples of 3 and 5, print FizzBuzz.
+</p>
+Input Format:
+<div>
+S</br>
+E</br>
+</div>
+</p>
+Output Format:
+<div>
+S</br>
+S+1</br>
+S+2</br>
+...</br>
+E-1</br>
+E</br>
+</div>
+</p>
+Where each line contains either a number, Fizz, Buzz or FizzBuzz, as per the task statement.
+</p>
+Sample Input:
+<div>
+9</br>
+15</br>
+</div>
+</p>
+Sample Output:
+<div>
+Fizz</br>
+Buzz</br>
+11</br>
+Fizz</br>
+13</br>
+14</br>
+FizzBuzz</br>
+</div>
+</p>
+
+<h4>Problem</h4>
+Give the answer for a S=21 to E=44
+</p>
+<textarea rows="10" cols="50" id="input2"> </textarea>
+
+<button onclick="check2()">Submit</button>
+</p>
+
+<hr>
+
+<h3>Problem 3</h3>
+
+Fluffy the squirrel is reading a book. The page numbers of the current pages that Fluffy is reading are two consecutive numbers, for example pages 8 and 9, pages 2015 and 2016 are both possible pages that Fluffy is reading. The naughty bird Flippy has erased some of the digits from the page numbers, which made Fluffy mad because he can't know which page he's currently on. Thus, he wonders what the possible page numbers of the two pages are. You're given the two numbers (note that they are consecutive, since they are two neighbouring pages), with some of its digits replaced with a question mark ('?'). Your task is to figure out all possibilities that the page numbers could've been.
+
+Note : The page numbers are positive, i.e. they are strictly larger than 0.
+
+<h4>Input</h4>
+The input consists of two lines. Both lines contain a string of digits, where some of its digits are replaced with '?'. The first line contains the smaller page number while the second one contains the larger page number. It is guaranteed that there are no leading zeroes (there can be leading question marks though), and both strings have equal length.
+
+Constraints: The number has at most 5 digits.
+
+<h4>Output</h4>
+Print n lines. On each line, print two space-seperated integers, denoting a pair of integers that might have been the page numbers. The first integer must be smaller than the second integer. Both integers must not have leading zeroes and must match the string of digits. (the '?' can be any digit from 0 to 9) Moreover, you should print the possible answers in increasing order, i.e. the first number of an earlier pair must be smaller than the first number of a later pair. See the sample for more details.
+
+<h4>Example</h4>
+<div>
+Input:</br>
+??3</br>
+?24</br>
+</div>
+</p>
+<div>
+Output:</br>
+123 124</br>
+223 224</br>
+323 324</br>
+423 424</br>
+523 524</br>
+623 624</br>
+723 724</br>
+823 824</br>
+923 924</br>
+</div>
+
+<h4>Problem</h4>
+Give the answer for
+<div>
+?2?</br>
+??9</br>
+</div>
+</p>
+
+
+</p>
+<textarea rows="10" cols="50" id="input3"> </textarea>
+
+<button onclick="check3()">Submit</button>
+</p>
+
+<hr>
+
+</body>
+</html>

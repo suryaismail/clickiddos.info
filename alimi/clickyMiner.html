@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Clicky Miner</title>
+
+    <meta charset="UTF-8">
+
+    <style>
+      #title {
+        border-color: grey;
+        border-style: inset;
+        width: 190px;
+        text-align: center;
+        margin: auto;
+        background-color: lightgrey;
+      }
+
+      #image {
+        margin-top: 50px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!--title of game-->
+    <h1 id="title">Clicky Miner</h1>
+
+    <!--breakable image-->
+    <img src="images/clickyMinerImages/stone/stone1.png" id="image" width="256" height="256">
+
+    <h2 id="score">Score: </h2>
+    <script>
+      //score of player
+      var score = 0;
+      //randomness to ores spawned
+      var randomInt = Math.floor((Math.random() * 4) + 1);
+      var timesClicked = 0;
+      var imageEl = document.getElementById("image");
+      var scoreEl = document.getElementById("score");
+
+      //break image function. imageLink = name of image. points = number to add to score.
+      var breakImage = function(clicksToBreak,imageLink, points) {
+        var step = clicksToBreak / 4;
+        if (timesClicked < step) {
+          imageEl.src = "images/clickyMinerImages/" + imageLink + "/" + imageLink + "1.png";
+        } else if (timesClicked < (step * 2)) {
+          imageEl.src = "images/clickyMinerImages/" + imageLink + "/" + imageLink + "2.png";
+        } else if (timesClicked < (step * 3)) {
+          imageEl.src = "images/clickyMinerImages/" + imageLink + "/" + imageLink + "3.png";
+        } else if (timesClicked < clicksToBreak) {
+          imageEl.src = "images/clickyMinerImages/" + imageLink + "/" + imageLink + "4.png";
+        } else {
+          //change current score
+          score = score + points;
+          scoreEl.textContent = "Score: " + score;
+          timesClicked = 0;
+          blank();
+        }
+        timesClicked++;
+      }
+
+      //give functions unique names
+      var stoneBreakImage = function () {breakImage(12, "stone", 100);}
+      var coalBreakImage = function () {breakImage(16, "coal", 300);}
+      var ironBreakImage = function () {breakImage(20, "iron", 500);}
+
+      //add first event listener
+      imageEl.addEventListener("click", stoneBreakImage);
+
+      //change event listners
+      var blank = function() {
+          if (randomInt < 4) {
+            //clear event listeners
+            imageEl.removeEventListener("click", stoneBreakImage);
+            imageEl.removeEventListener("click", coalBreakImage);
+            imageEl.removeEventListener("click", ironBreakImage);
+            //add event listener to stone
+            imageEl.addEventListener("click", stoneBreakImage);
+          } else {
+            imageEl.removeEventListener("click", stoneBreakImage);
+            imageEl.removeEventListener("click", coalBreakImage);
+            imageEl.removeEventListener("click", ironBreakImage);
+            //add event listener to stone
+            imageEl.addEventListener("click", coalBreakImage);
+          }
+        randomInt = Math.floor((Math.random() * 4) + 1)
+      }
+    </script>
+  </body>
+</html>
