@@ -1,0 +1,5 @@
+MAPception is a map within multiple maps. You fight zombies and wizards.
+There's a "path" for "big sized" characters which doesn't exist (current plan).
+The character who the player plays as is 4 pixels in height.
+There's another path for the normal sized character, which is within the other path.
+The map consists of multiple shapes, it's quite fun.
