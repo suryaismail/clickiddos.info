@@ -35,7 +35,7 @@ var jumpCounter = 0;
 void draw() {
   if (amJumping) {
     if (jumpCounter < 20) {
-      manY -=10;
+      manY -=10.5;
     }
     if (jumpCounter >= 20) {
       manY +=10;
