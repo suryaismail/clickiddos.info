@@ -17,17 +17,17 @@ var RmanStep = 0;
 void setup() {
   size(screenWidth, screenHeight);
   noStroke();
-  Left[0] = loadImage("ninL2.png");
-  Left[1] = loadImage("ninL3.png");
-  Left[2] = loadImage("ninL4.png");
-  Left[3] = loadImage("ninL5.png");
-  Left[4] = loadImage("ninL6.png");
-  Right[0] = loadImage("ninR2.png");
-  Right[1] = loadImage("ninR3.png");
-  Right[2] = loadImage("ninR4.png");
-  Right[3] = loadImage("ninR5.png");
-  Right[4] = loadImage("ninR6.png");
-  ninJump = loadImage("Ninja3.png");
+  Left[0] = loadImage("ninL1.png");
+  Left[1] = loadImage("ninL2.png");
+  Left[2] = loadImage("ninL3.png");
+  Left[3] = loadImage("ninL4.png");
+  Left[4] = loadImage("ninL5.png");
+  Right[0] = loadImage("ninR1.png");
+  Right[1] = loadImage("ninR2.png");
+  Right[2] = loadImage("ninR3.png");
+  Right[3] = loadImage("ninR4.png");
+  Right[4] = loadImage("ninR5.png");
+  ninJump = loadImage("NinjaJ.png");
   bgImage = loadImage("wall.png");
 }
 
