@@ -21,12 +21,12 @@ var boomCount = 0;
 void setup() {
   size(screenWidth, screenHeight);
 
-  manImages [0] = loadImage("WizardRight.png");
-  manImages [1] = loadImage("WizardRight1.png");
-  manImages [2] = loadImage("WizardRight2.png");
-  manImages [3] = loadImage("WizardRight2.png");
-  rockImage = loadImage("Rock.png");
-  boomImage = loadImage("Boom.png");
+  manImages [0] = loadImage("wizardRight.png");
+  manImages [1] = loadImage("wizardRight1.png");
+  manImages [2] = loadImage("wizardRight2.png");
+  manImages [3] = loadImage("wizardRight2.png");
+  rockImage = loadImage("rock.png");
+  boomImage = loadImage("boom.png");
 
 }
 
