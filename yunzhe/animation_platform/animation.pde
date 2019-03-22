@@ -1,4 +1,3 @@
-
 var screenWidth = 800;
 var screenHeight = 600;
 var MARGIN = 40;
@@ -34,7 +33,6 @@ void setup() {
   size(screenWidth, screenHeight);
   background(255, 255, 255);
   fill(255, 255, 255);
-  noStroke();
 
   man = loadImage("StickMan.png");
   manY = walkLevel - MAN_HEIGHT;
@@ -42,26 +40,25 @@ void setup() {
 
 var jumpCounter = 0;
 void draw() {
-
+  console.log(playerState);
   background(255, 255, 255);
   drawPlatform();
 
-  console.log(playerState)
   fill(0, 125, 125);
   rect(0, floor, PLATFORM_WIDTH, 2);
 
-  if (playerState = "wLeft") {
+  if (playerState == "wLeft") {
       if (manX > MARGIN) {
         manX -= walkStep;
       }
   }
-  if (playerState = "wRight") {
+  if (playerState == "wRight") {
     if (manX < (screenWidth - MARGIN)) {
       manX += walkStep;
     }
   }
 
-  if (playerState = "amJumping") {
+  if (playerState == "amJumping") {
 
     if (jumpCounter < JUMP_HEIGHT) {
       manY -= JUMP_STEP;
