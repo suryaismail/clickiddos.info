@@ -1,14 +1,16 @@
 var screenWidth = 800;
 var screenHeight = 600;
 
+//floor of level = 435
 var floor = 435;
 
 var movingLeft = false;
 var movingRight = false;
 
 var isJumping = false;
+var onFloor = true;
 var jumpCounter = 0;
-var JUMP_TIME = 20;
+var JUMP_TIME = 30;
 
 var posChange = true;
 
@@ -41,7 +43,9 @@ void setup() {
 
 void draw() {
   //load images
+  //for testing, add // to the line below and replace with background(255, 255, 255);
   background(bg);
+  background(255, 255, 255);
   image(platform, PLATFORM_X, PLATFORM_Y);
   image(player, playerX, playerY);
 
@@ -50,30 +54,40 @@ void draw() {
     playerX -= 5;
   }
   if (movingRight) {
-    playerX += 5
+    playerX += 5;
+  }
+
+  //gravity
+  if (playerY < floor) {
+    playerY += 5;
+    onFloor = false;
+  } else {
+    onFloor = true;
   }
 
   //test for jumping
   if (isJumping) {
     if (jumpCounter < JUMP_TIME) {
-      playerY -= 10
+      playerY -= 10;
+    }
 
     jumpCounter += 1;
 
-    if (jumpCounter > JUMP_TIME - 1) {
+    if (jumpCounter > JUMP_TIME - 2) {
       jumpCounter = 0;
       isJumping = false;
     }
   }
 
-  //gravity
-  if (playerY < floor) {
+  //test for platform, number 20 in nexy if statement makes it so that player doesn't get on platform at
+  //wrong place. This number can be changed to suit preference.
+  if ((playerX + PLAYER_WIDTH - 20 >= PLATFORM_X) && (playerX + 20 < PLATFORM_X + PLATFORM_WIDTH) && (playerY + PLAYER_HEIGHT <= PLATFORM_Y)) {
+    console.log("platform");
+    floor = PLATFORM_Y - PLAYER_HEIGHT;
+  } else {
+    console.log("floor");
+    floor = 435;
   }
-
-  /*test for platform
-  if (playerX > PLATFORM_X) && (playerX + PLAYER_WIDTH > PLATFORM_X + PLATFORM_WIDTH) && (playerY + PLAYER_HEIGHT == PLATFORM_Y) {
-    playerY == PLATFORM_Y - PLAYER_HEIGHT;
-  }*/
 }
 
 void keyPressed() {
@@ -90,7 +104,10 @@ void keyPressed() {
       }
       break;
     case SPACE:
-      isJumping = true;
+      if (onFloor) {
+        isJumping = true;
+      }
+      break;
     default:
       break;
   }
