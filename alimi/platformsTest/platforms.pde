@@ -52,10 +52,10 @@ void draw() {
   console.log(jumpCounter);
 
   //moving left and right
-  if (movingLeft) {
+  if (movingLeft && playerX > 0) {
     playerX -= 5;
   }
-  if (movingRight) {
+  if (movingRight && playerX + PLAYER_WIDTH < 800) {
     playerX += 5;
   }
 
@@ -94,14 +94,10 @@ void keyPressed() {
 
   switch (keyCode) {
     case LEFT:
-        if (playerX > 0) {
           movingLeft = true;
-        }
         break;
     case RIGHT:
-      if (playerX < screenWidth) {
         movingRight = true;
-      }
       break;
     case SPACE:
       if (onFloor) {
