@@ -11,6 +11,7 @@ var isJumping = false;
 var onFloor = true;
 var jumpCounter = 0;
 var JUMP_TIME = 30;
+var STEP = 5;
 
 var posChange = true;
 
@@ -24,7 +25,7 @@ var PLAYER_WIDTH = 45;
 var PLAYER_HEIGHT = 60;
 
 var PLATFORM_X = 100;
-var PLATFORM_Y = 400;
+var PLATFORM_Y = 397;
 var PLATFORM_HEIGHT = 27;
 var PLATFORM_WIDTH = 137;
 
@@ -49,28 +50,18 @@ void draw() {
   image(platform, PLATFORM_X, PLATFORM_Y);
   image(player, playerX, playerY);
 
-  console.log(jumpCounter);
-
   //moving left and right
   if (movingLeft && playerX > 0) {
-    playerX -= 5;
+    playerX -= STEP;
   }
   if (movingRight && playerX + PLAYER_WIDTH < 800) {
-    playerX += 5;
-  }
-
-  //gravity
-  if (playerY < floor) {
-    playerY += 5;
-    onFloor = false;
-  } else {
-    onFloor = true;
+    playerX += STEP;
   }
 
   //test for jumping
   if (isJumping) {
     if (jumpCounter < JUMP_TIME) {
-      playerY -= 10;
+      playerY -= STEP;
     }
 
     jumpCounter += 1;
@@ -79,12 +70,25 @@ void draw() {
       jumpCounter = 0;
       isJumping = false;
     }
+  } else {
+
+    //gravity
+    if (playerY < floor) {
+      playerY += STEP;
+      onFloor = false;
+    } else {
+      onFloor = true;
+    }
   }
 
-  //test for platform, number 20 in nexy if statement makes it so that player doesn't get on platform at
+  //test for platform, number 20 in next if statement makes it so that player doesn't get on platform at
   //wrong place. This number can be changed to suit preference.
-  if ((playerX + PLAYER_WIDTH - 20 >= PLATFORM_X) && (playerX + 20 < PLATFORM_X + PLATFORM_WIDTH) && (playerY + PLAYER_HEIGHT <= PLATFORM_Y)) {
+  if ((playerX + PLAYER_WIDTH - 20 >= PLATFORM_X) && (playerX + 20 < PLATFORM_X + PLATFORM_WIDTH)
+  && (playerY + PLAYER_HEIGHT <= PLATFORM_Y)) {
     floor = PLATFORM_Y - PLAYER_HEIGHT;
+    if ((floor - playerY <= STEP) && (!isJumping)) {
+      playerY = floor;
+    }
   } else {
     floor = 435;
   }
