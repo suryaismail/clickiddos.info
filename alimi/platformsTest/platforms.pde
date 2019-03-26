@@ -44,10 +44,12 @@ void setup() {
 void draw() {
   //load images
   //for testing, add '//' to the line below and replace remove '//' at background(255, 255, 255);
-  background(bg);
-  //background(255, 255, 255);
+  //background(bg);
+  background(255, 255, 255);
   image(platform, PLATFORM_X, PLATFORM_Y);
   image(player, playerX, playerY);
+
+  console.log(jumpCounter);
 
   //moving left and right
   if (movingLeft) {
@@ -73,7 +75,7 @@ void draw() {
 
     jumpCounter += 1;
 
-    if (jumpCounter > JUMP_TIME - 2) {
+    if (jumpCounter > JUMP_TIME) {
       jumpCounter = 0;
       isJumping = false;
     }
@@ -82,10 +84,8 @@ void draw() {
   //test for platform, number 20 in nexy if statement makes it so that player doesn't get on platform at
   //wrong place. This number can be changed to suit preference.
   if ((playerX + PLAYER_WIDTH - 20 >= PLATFORM_X) && (playerX + 20 < PLATFORM_X + PLATFORM_WIDTH) && (playerY + PLAYER_HEIGHT <= PLATFORM_Y)) {
-    console.log("platform");
     floor = PLATFORM_Y - PLAYER_HEIGHT;
   } else {
-    console.log("floor");
     floor = 435;
   }
 }

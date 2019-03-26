@@ -3,7 +3,7 @@ var screenWidth = 800;
 var screenHeight = 600;
 var MARGIN = 40;
 
-var FLOOR = screenHeight - 40
+var FLOOR = screenHeight - 40;
 var walkLevel = FLOOR;
 var manX = 10;
 var manY = 0;
