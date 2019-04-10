@@ -5,7 +5,8 @@ var screenWidth = 600;
 var screenHeight = 400;
 var MARGIN = 10;
 
-var FLOOR = screenHeight - 40
+var FLOOR = screenHeight - 40;
+var PLAYER_STEP = 7;
 var GRAVITY_STEP = 2;
 
 var JUMP_STEP = 2;
@@ -14,7 +15,7 @@ var amJumping = false;
 var jumpCounter = 0;
 
 var player;
-var platform0, platform1;
+var platform0, platform1, platform2;
 
 void setup() {
   size(screenWidth, screenHeight);
@@ -23,8 +24,9 @@ void setup() {
   noStroke();
 
   player = new Player(loadImage("StickMan.png"), 10, FLOOR)
-  platform0 = new Platform(100, 300, 100, 5);
-  platform1 = new Platform(200, 270, 230, 5);
+  platform0 = new Platform(100, 270, 100, 5);
+  platform1 = new Platform(200, 250, 150, 5);
+  platform2 = new Platform(400, 300, 30, 5);
 }
 
 void draw() {
@@ -33,15 +35,17 @@ void draw() {
   background(255, 255, 255)
   platform0.draw();
   platform1.draw();
+  platform2.draw();
+
   player.draw()
 }
-
 
 function calculate() {
     calculateJump()
     calculateGravity()
     calculatePlatform(player, platform0)
     calculatePlatform(player, platform1)
+    calculatePlatform(player, platform2)
 }
 
 function calculateJump() {
@@ -50,11 +54,14 @@ function calculateJump() {
       if (jumpCounter < JUMP_HEIGHT) {
         player.y -= JUMP_STEP
       } else {
-        jumpCounter = 0
-        amJumping = false
-        console.log("stop jump")
+        stopJump()
       }
     }
+}
+
+function stopJump() {
+  amJumping = false;
+  jumpCounter = 0
 }
 
 function calculateGravity() {
@@ -70,13 +77,31 @@ function calculateGravity() {
 
 function calculatePlatform(player, platform) {
   if (amJumping) {
+    if(isCollide(player, platform)) {
+      // If player head touch the platform, stop him from going up
+      if ((platform.top() <= player.top()) && (player.top() <= platform.bottom())) {
+        player.y = platform.bottom();
+        stopJump();
+      }
+    }
     return
   }
 
   if(isCollide(player, platform)) {
+    // If player feet touch the platform
     if ((platform.top() <= player.bottom()) && (player.bottom() <= platform.bottom())) {
       player.setBottomTo(platform.top());
-      amJumping = false;
+      return
+    }
+    // If player bumps from the left
+    if (player.midX() < platform.midX()) {
+      var startX = player.x
+      player.x = player.x - PLAYER_STEP;
+      return
+    } else {
+      // If player bumps from the right
+      var startX = player.x
+      player.x = player.x + PLAYER_STEP;
     }
   }
 }
@@ -91,12 +116,12 @@ void keyPressed() {
   switch (keyCode) {
   case LEFT:
       if (player.x > MARGIN) {
-        player.x -= 5;
+        player.x -= PLAYER_STEP;
       }
       break;
   case RIGHT:
       if (player.x < (screenWidth - MARGIN)) {
-        player.x += 5;
+        player.x += PLAYER_STEP;
       }
       break;
   case SPACE:
@@ -107,59 +132,54 @@ void keyPressed() {
   }
 }
 
-var count = 1;
 function isCollide(a, b) {
   return (a.left() <= b.right() && a.right() >= b.left()) &&
          (a.top() <= b.bottom() && a.bottom() >= b.top())
 }
 
-function Player(pImage, x, y) {
-  this.pImage = pImage
-  this.x = x
-  this.y = y - pImage.height
-  this.width = pImage.width
-  this.height = pImage.height
-
-  this.top = function() {return this.y}
-  this.bottom = function() {return this.y + this.height }
-  this.left = function() {return this.x }
-  this.right = function() {return this.x + this.width }
-  this.midY = function() {return this.y + (this.height / 2) }
-
-  this.draw = function () {
-    image(this.pImage, this.x, this.y)
-  }
-  this.toString = function () {
-    return ("top " + this.top() + " bottom " + this.bottom() +
-    " left " + this.left() + " right " + this.right())
-  }
-
-  this.setBottomTo = function (bottom) {
-    this.y = bottom - this.height;
-  }
-}
-
-function Platform(x, y, width, height) {
+function GameObject(x, y, width, height) {
   this.x = x
   this.y = y
   this.width = width
   this.height = height
-  if (height <= GRAVITY_STEP) {
-    console.log("PLATFORMS(" + height + ") must have height more than GRAVITY_STEP(" + GRAVITY_STEP + ")")
-    this.height = GRAVITY_STEP + 1;
-  }
+}
 
-  this.top = function() {return this.y}
-  this.bottom = function() {return this.y + this.height }
-  this.left = function() {return this.x }
-  this.right = function() {return this.x + this.width }
+GameObject.prototype.top = function() {return this.y}
+GameObject.prototype.bottom = function() {return this.y + this.height }
+GameObject.prototype.left = function() {return this.x }
+GameObject.prototype.right = function() {return this.x + this.width }
+GameObject.prototype.midY = function() {return this.y + (this.height / 2) }
+GameObject.prototype.midX = function() {return this.x + (this.width / 2) }
+
+GameObject.prototype.setBottomTo = function (bottom) {
+  this.y = bottom - this.height;
+}
+GameObject.prototype.setRightTo = function (right) {
+  this.x = right - this.width;
+}
+
+GameObject.prototype.dimensionString = function () {
+    return ("top " + this.top() + " bottom " + this.bottom() +
+    " left " + this.left() + " right " + this.right())
+}
+
+function Player(pImage, x, y) {
+  this.pImage = pImage
+  GameObject.call(this, x, y - pImage.height, pImage.width, pImage.height)
+
+  this.draw = function () {
+    image(this.pImage, this.x, this.y)
+  }
+}
+Player.prototype = Object.create(GameObject.prototype);
+
+function Platform(x, y, width, height) {
+  GameObject.call(this, x, y, width, (height <= GRAVITY_STEP) ? this.height = GRAVITY_STEP + 1 : height)
 
   this.draw = function () {
     fill(0, 125, 125)
     rect(x, y, width, height)
   }
-  this.toString = function () {
-    return ("top " + this.top() + " bottom " + this.bottom() +
-    " left " + this.left() + " right " + this.right())
-  }
+
 }
+Platform.prototype = Object.create(GameObject.prototype);
