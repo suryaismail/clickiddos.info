@@ -1,16 +1,9 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 var GRAVITY_STEP = 5;
-=======
-=======
->>>>>>> Stashed changes
 var SCREEN_WIDTH = 800;
 var SCREEN_HEIGHT = 600;
 var MARGIN = 10;
 
-var GRAVITY_STEP = 2;
->>>>>>> Stashed changes
-
+// Game objects
 function GameObject(x, y, width, height) {
   this.x = x;
   this.y = y;
@@ -32,6 +25,37 @@ GameObject.prototype.setRightTo = function (right) {
   this.x = right - this.width;
 }
 
+function isCollide(a, b) {
+  return (a.left() <= b.right() && a.right() >= b.left()) &&
+         (a.top() <= b.bottom() && a.bottom() >= b.top())
+}
+
+// Player
+function Player(pImage, x, y) {
+  this.pImage = pImage;
+  GameObject.call(this, x, y - pImage.height, pImage.width, pImage.height);
+  //Movement.call(this, 7);
+  //Jumping.call(this, 2, 35);
+
+  this.draw = function () {
+    image(this.pImage, this.x, this.y);
+  }
+}
+Player.prototype = Object.create(GameObject.prototype);
+
+// Platforms
+function Platform(x, y, width, height) {
+  GameObject.call(this, x, y, width, (height <= GRAVITY_STEP) ? this.height = GRAVITY_STEP + 1 : height);
+
+  this.draw = function () {
+    fill(0, 125, 125);
+    rect(x, y, width, height);
+  }
+
+}
+Platform.prototype = Object.create(GameObject.prototype);
+/*
+
 function Movement(moveSpeed) {
   this.movingLeft = false;
   this.movingRight = false;
@@ -46,31 +70,4 @@ function Jumping(jumpSpeed, jumpDura, jumpStepCount = 0) {
   this.jumpDura = jumpDura;
   this.jumpStepCount = jumpStepCount;
 }
-
-function isCollide(a, b) {
-  return (a.left() <= b.right() && a.right() >= b.left()) &&
-         (a.top() <= b.bottom() && a.bottom() >= b.top())
-}
-
-function Player(pImage, x, y) {
-  this.pImage = pImage;
-  GameObject.call(this, x, y - pImage.height, pImage.width, pImage.height);
-  Movement.call(this, 7);
-  Jumping.call(this, 2, 35);
-
-  this.draw = function () {
-    image(this.pImage, this.x, this.y);
-  }
-}
-Player.prototype = Object.create(GameObject.prototype);
-
-function Platform(x, y, width, height) {
-  GameObject.call(this, x, y, width, (height <= GRAVITY_STEP) ? this.height = GRAVITY_STEP + 1 : height);
-
-  this.draw = function () {
-    fill(0, 125, 125);
-    rect(x, y, width, height);
-  }
-
-}
-Platform.prototype = Object.create(GameObject.prototype);
+*/
