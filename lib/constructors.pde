@@ -52,7 +52,7 @@ function Player(pImage, x, y) {
   GameObject.call(this, x, y - pImage.height, pImage.width, pImage.height);
 
   this.movement = new Movement(7);
-  this.jumping = new Jumping(2, 35);
+  this.jumping = new Jumping(2, 35, 0);
 
   this.draw = function () {
     image(this.pImage, this.x, this.y);
