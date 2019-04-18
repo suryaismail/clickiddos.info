@@ -30,12 +30,29 @@ function isCollide(a, b) {
          (a.top() <= b.bottom() && a.bottom() >= b.top())
 }
 
+// Player movement
+function Movement(moveSpeed) {
+  this.movingLeft = false;
+  this.movingRight = false;
+  this.movingUp = false;
+  this.movingDown = false;
+  this.moveSpeed = moveSpeed;
+}
+
+function Jumping(jumpSpeed, jumpDura, jumpStepCount) {
+  this.jumping = false;
+  this.jumpSpeed = jumpSpeed;
+  this.jumpDura = jumpDura;
+  this.jumpStepCount = jumpStepCount;
+}
+
 // Player
 function Player(pImage, x, y) {
   this.pImage = pImage;
   GameObject.call(this, x, y - pImage.height, pImage.width, pImage.height);
-  //Movement.call(this, 7);
-  //Jumping.call(this, 2, 35);
+
+  this.movement = new Movement(7);
+  this.jumping = new Jumping(2, 35, 0);
 
   this.draw = function () {
     image(this.pImage, this.x, this.y);
@@ -54,20 +71,3 @@ function Platform(x, y, width, height) {
 
 }
 Platform.prototype = Object.create(GameObject.prototype);
-/*
-
-function Movement(moveSpeed) {
-  this.movingLeft = false;
-  this.movingRight = false;
-  this.movingUp = false;
-  this.movingDown = false;
-  this.moveSpeed = moveSpeed;
-}
-
-function Jumping(jumpSpeed, jumpDura, jumpStepCount = 0) {
-  this.jumping = false;
-  this.jumpSpeed = jumpSpeed;
-  this.jumpDura = jumpDura;
-  this.jumpStepCount = jumpStepCount;
-}
-*/
