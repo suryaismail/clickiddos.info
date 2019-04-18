@@ -39,7 +39,8 @@ function Movement(moveSpeed) {
   this.moveSpeed = moveSpeed;
 }
 
-function Jumping(jumpSpeed, jumpDura, jumpStepCount) {
+// Player jumping
+function Jump(jumpSpeed, jumpDura, jumpStepCount) {
   this.jumping = false;
   this.jumpSpeed = jumpSpeed;
   this.jumpDura = jumpDura;
@@ -52,7 +53,7 @@ function Player(pImage, x, y) {
   GameObject.call(this, x, y - pImage.height, pImage.width, pImage.height);
 
   this.movement = new Movement(7);
-  this.jumping = new Jumping(2, 35, 0);
+  this.jump = new Jump(5, 35, 0);
 
   this.draw = function () {
     image(this.pImage, this.x, this.y);
@@ -63,6 +64,15 @@ Player.prototype = Object.create(GameObject.prototype);
 // Platforms
 function Platform(x, y, width, height) {
   GameObject.call(this, x, y, width, (height <= GRAVITY_STEP) ? this.height = GRAVITY_STEP + 1 : height);
+
+  this.playerIsOnPlatform = function () {
+    if ((isCollide(player, this)) && ((platform.top() <= player.bottom()) && (player.bottom() <= platform.bottom()))) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
   this.draw = function () {
     fill(0, 125, 125);
