@@ -5,26 +5,28 @@ function playerMovement(keycode, player, margin, screenWidth, floor) {
       DOWN = 40,
       SPACE = 32;
 
+      console.log("playerMovement keycode:" + keycode + " " + player.movement.movingLeft);
+
   switch (keycode) {
     case LEFT:
-        if (!player.movingLeft & player.x > margin) {
-          player.movingLeft = true;
+        if (!player.movement.movingLeft & player.x > margin) {
+          player.movement.movingLeft = true;
         }
         else {
-          player.movingLeft = false;
+          player.movement.movingLeft = false;
         }
         break;
     case RIGHT:
-        if (!player.movingRight & player.x < screenWidth - margin) {
-          player.movingRight = true;
+        if (!player.movement.movingRight & player.x < screenWidth - margin) {
+          player.movement.movingRight = true;
         }
         else {
-          player.movingRight = false;
+          player.movement.movingRight = false;
         }
         break;
     case SPACE:
         if (player.bottom() == floor) {
-          player.jumping = true;
+          player.movement.jumping = true;
         }
         break;
     default:

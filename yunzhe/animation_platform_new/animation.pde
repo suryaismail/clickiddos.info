@@ -104,9 +104,9 @@ function calculatePlatform(platform) {
 }
 
 void keyPressed() {
-  playerMovement(keycode, player, MARGIN, SCREEN_WIDTH, FLOOR);
+  playerMovement(keyCode, player, MARGIN, SCREEN_WIDTH, FLOOR);
 }
 
 void keyReleased() {
-  playerMovement(keycode, player, MARGIN, SCREEN_WIDTH, FLOOR);
+  playerMovement(keyCode, player, MARGIN, SCREEN_WIDTH, FLOOR);
 }
