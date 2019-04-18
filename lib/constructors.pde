@@ -1,4 +1,4 @@
-var GRAVITY_STEP = 2;
+var GRAVITY_STEP = 5;
 
 function GameObject(x, y, width, height) {
   this.x = x
