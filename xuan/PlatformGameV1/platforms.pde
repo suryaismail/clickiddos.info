@@ -57,7 +57,7 @@ void setup() {
 void draw() {
   //load images
   //for testing, add '//' to the line below and replace remove '//' at background(255, 255, 255);
-  background(bg);
+  background(bg, 255, 255);
   //background(255, 255, 255);
   image(platform, PLATFORM1_X, PLATFORM1_Y);
   image(platform, PLATFORM2_X, PLATFORM2_Y);
