@@ -10,27 +10,37 @@ PImage bg;
 void setup() {
   size(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-  FLOOR = SCREEN_HEIGHT - 136;
+  FLOOR = SCREEN_HEIGHT - 60;
   bg = loadImage("../../assets/background/bigRockTheBackground.png");
   player = new Player(loadImage("StickMan.png"), 10, FLOOR);
 
-  platforms.push(new Platform(100, 270, 100, 5));
-  platforms.push(new Platform(200, 250, 150, 5));
-  platforms.push(new Platform(400, 300, 30, 5));
+  platforms.push(new Platform(100, 370, 100, 5));
+  platforms.push(new Platform(200, 350, 150, 5));
+  platforms.push(new Platform(400, 400, 30, 5));
 }
 
 void draw() {
-  calculate();
-
   image(bg);
+  calculate();
   drawPlatforms();
   player.draw();
 }
 
 function calculate() {
+    calculateMovement();
     calculateJump();
     calculateGravity();
     calculatePlatforms();
+}
+
+function calculateMovement() {
+    if ((player.movement.movingLeft) && (player.x > MARGIN)) {
+      player.x -= player.movement.moveSpeed;
+    }
+
+    if ((player.movement.movingRight) && (player.right() < SCREEN_WIDTH - MARGIN)) {
+      player.x += player.movement.moveSpeed;
+    }
 }
 
 function calculatePlatforms() {
@@ -46,10 +56,10 @@ function drawPlatforms() {
 }
 
 function calculateJump() {
-    if (player.jumping) {
-      player.jumpStepCount += 1;
-      if (player.jumpStepCount < player.jumpDura) {
-        player.y -= player.jumpSpeed;
+    if (player.jump.jumping) {
+      player.jump.jumpStepCount += 1;
+      if (player.jump.jumpStepCount < player.jump.jumpDura) {
+        player.y -= player.jump.jumpSpeed;
       } else {
         stopJump();
       }
@@ -57,12 +67,12 @@ function calculateJump() {
 }
 
 function stopJump() {
-  player.jumping = false;
-  player.jumpStepCount = 0;
+  player.jump.jumping = false;
+  player.jump.jumpStepCount = 0;
 }
 
 function calculateGravity() {
-  if (player.jumping) {
+  if (player.jump.jumping) {
     return;
   }
   if (player.bottom() > FLOOR) {
@@ -73,18 +83,17 @@ function calculateGravity() {
 }
 
 function calculatePlatform(platform) {
-  if (player.jumping) {
-    if(isCollide(player, platform)) {
+  if (player.jump.jumping) {
+    if (isCollide(player, platform)) {
       // If player head touch the platform, stop him from going up
       if ((platform.top() <= player.top()) && (player.top() <= platform.bottom())) {
         player.y = platform.bottom();
         stopJump();
       }
     }
-    return;
   }
 
-  if(isCollide(player, platform)) {
+  if (isCollide(player, platform)) {
     // If player feet touch the platform
     if ((platform.top() <= player.bottom()) && (player.bottom() <= platform.bottom())) {
       player.setBottomTo(platform.top());
@@ -93,20 +102,20 @@ function calculatePlatform(platform) {
     // If player bumps from the left
     if (player.midX() < platform.midX()) {
       var startX = player.x
-      player.x = player.x - player.moveSpeed;
+      player.x = player.x - player.movement.moveSpeed;
       return
     } else {
       // If player bumps from the right
       var startX = player.x
-      player.x = player.x + player.moveSpeed;
+      player.x = player.x + player.movement.moveSpeed;
     }
   }
 }
 
 void keyPressed() {
-  playerMovement(keyCode, player, MARGIN, SCREEN_WIDTH, FLOOR);
+  playerMovementPress(keyCode, player, platforms, MARGIN, SCREEN_WIDTH, FLOOR);
 }
 
 void keyReleased() {
-  playerMovement(keyCode, player, MARGIN, SCREEN_WIDTH, FLOOR);
+  playerMovementRelease(keyCode, player, MARGIN, SCREEN_WIDTH, FLOOR);
 }
