@@ -1,0 +1,11 @@
+var Speed = 10;
+
+function Projectile(pImage, x, y) {
+  this.pImage = pImage;
+  GameObject.call(this, x, y - pImage.height, pImage.width, pImage.height);
+
+  this.draw = function () {
+    image(this.pImage, this.x - Speed, this.y);
+  }
+}
+Spike.prototype = Object.create(GameObject.prototype);
