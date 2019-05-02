@@ -75,7 +75,6 @@ function Platform(x, y, width, height) {
   }
 
   this.draw = function () {
-    fill(0, 125, 125);
     rect(x, y, width, height);
   }
 

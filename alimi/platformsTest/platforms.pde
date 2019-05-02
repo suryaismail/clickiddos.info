@@ -1,8 +1,8 @@
 var screenWidth = 800;
 var screenHeight = 600;
 
-//floor of level = 435
-var floor = 435;
+//FLOOR of level = 435
+var FLOOR = 435;
 
 var movingLeft = false;
 var movingRight = false;
@@ -20,7 +20,7 @@ var LEFT = 37,
     SPACE = 32
 
 var playerX = 100;
-var playerY = floor;
+var playerY = FLOOR;
 var PLAYER_WIDTH = 45;
 var PLAYER_HEIGHT = 60;
 
@@ -29,14 +29,20 @@ var PLATFORM_Y = 397;
 var PLATFORM_HEIGHT = 27;
 var PLATFORM_WIDTH = 137;
 
+var SPIKES_HEIGHT = 122;
+var SPIKES_WIDTH = 116;
+var SPIKES_Y = FLOOR - PLAYER_HEIGHT;
+var SPIKES_X = 600;
 
 PImage platform;
 PImage bg;
 PImage player;
+PImage spikes;
 
 void setup() {
   size(screenWidth, screenHeight);
 
+  spikes = loadImage("spikes.png");
   player = loadImage("wizardRight.png");
   bg = loadImage("xuanBackground.png");
   platform = loadImage("xuanPlatform.png");
@@ -45,10 +51,11 @@ void setup() {
 void draw() {
   //load images
   //for testing, add '//' to the line below and replace remove '//' at background(255, 255, 255);
-  //background(bg);
-  background(255, 255, 255);
+  background(bg);
+  //background(255, 255, 255);
   image(platform, PLATFORM_X, PLATFORM_Y);
   image(player, playerX, playerY);
+  image(spikes, SPIKES_X, SPIKES_Y);
 
   //moving left and right
   if (movingLeft && playerX > 0) {
@@ -73,7 +80,7 @@ void draw() {
   } else {
 
     //gravity
-    if (playerY < floor) {
+    if (playerY < FLOOR) {
       playerY += STEP;
       onFloor = false;
     } else {
@@ -85,12 +92,12 @@ void draw() {
   //wrong place. This number can be changed to suit preference.
   if ((playerX + PLAYER_WIDTH - 20 >= PLATFORM_X) && (playerX + 20 < PLATFORM_X + PLATFORM_WIDTH)
   && (playerY + PLAYER_HEIGHT <= PLATFORM_Y)) {
-    floor = PLATFORM_Y - PLAYER_HEIGHT;
-    if ((floor - playerY <= STEP) && (!isJumping)) {
-      playerY = floor;
+    FLOOR = PLATFORM_Y - PLAYER_HEIGHT;
+    if ((FLOOR - playerY <= STEP) && (!isJumping)) {
+      playerY = FLOOR;
     }
   } else {
-    floor = 435;
+    FLOOR = 435;
   }
 }
 

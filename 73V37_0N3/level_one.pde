@@ -6,15 +6,7 @@ var screenHeight = 600;
 var FLOOR = screenHeight;
 var onFloor = true;
 
-var movingLeft = false;
-var movingRight = false;
-var isJumping = false;
-
-var jumpCounter = 0;
-var JUMP_TIME = 30;
-var STEP = 5;
-
-var posChange = true;
+var amJumping = false;
 
 var LEFT = 37,
     RIGHT = 39,
@@ -22,6 +14,7 @@ var LEFT = 37,
 
 var playerX = 100;
 var playerY = floor;
+var PLAYER_STEP = 5;
 
 var PLATFORM_HEIGHT = 27;
 var PLATFORM_WIDTH = 137;
@@ -29,14 +22,27 @@ var PLATFORM_WIDTH = 137;
 PImage bg;
 
 var player;
+var platform;
 
 void setup() {
-  player = new Player(loadImage("../assets/wizard/wizardRight.png"), 10, FLOOR);
   size(screenWidth, screenHeight);
+  fill(0, 0, 0);
+
+  player = new Player(loadImage("../assets/wizard/wizardRight.png"), 10, FLOOR);
+  platform = new Platform(400, 500, PLATFORM_WIDTH, PLATFORM_HEIGHT);
   bg = loadImage("../assets/background/bigRockTheBackground.png");
 }
 
 void draw() {
+  calculate();
   image(bg);
+  platform.draw();
   player.draw();
+}
+
+function calculate() {
+    calculateLeftRight();
+    calculateJump();
+    calculateGravity();
+    calculatePlatform(player, platform);
 }
