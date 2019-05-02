@@ -1,48 +1,35 @@
 /* @pjs preload="../assets/wizard/wizardRight.png"; */
 
-var screenWidth = 800;
-var screenHeight = 600;
-
-var FLOOR = screenHeight;
-var onFloor = true;
-
-var amJumping = false;
-
-var LEFT = 37,
-    RIGHT = 39,
-    SPACE = 32
-
-var playerX = 100;
-var playerY = floor;
-var PLAYER_STEP = 5;
-
-var PLATFORM_HEIGHT = 27;
-var PLATFORM_WIDTH = 137;
-
+var FLOOR;
+var platforms = new Array();
 PImage bg;
 
 var player;
 var platform;
 
 void setup() {
-  size(screenWidth, screenHeight);
+  FLOOR = SCREEN_HEIGHT;
+  size(SCREEN_WIDTH, SCREEN_HEIGHT);
   fill(0, 0, 0);
 
   player = new Player(loadImage("../assets/wizard/wizardRight.png"), 10, FLOOR);
-  platform = new Platform(400, 500, PLATFORM_WIDTH, PLATFORM_HEIGHT);
+  platforms.push(new Platform(400, 500, 137, 27));
   bg = loadImage("../assets/background/bigRockTheBackground.png");
+
+  console.log(FLOOR);
 }
+
 
 void draw() {
   calculate();
   image(bg);
-  platform.draw();
+  drawPlatforms(platforms);
   player.draw();
 }
 
 function calculate() {
-    calculateLeftRight();
+    calculateMovement();
     calculateJump();
     calculateGravity();
-    calculatePlatform(player, platform);
+    calculatePlatforms(platforms);
 }
