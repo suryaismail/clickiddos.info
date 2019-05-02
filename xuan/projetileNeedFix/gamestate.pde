@@ -1,17 +1,17 @@
-/* @pjs preload="StickMan.png","Spikes.png"; */
+/* @pjs preload="StickMan.png","Spikes.png","fireball.png","Start.png","End.png"; */
 
 var FLOOR;
 
 var player;
 var platforms = new Array();
 var spike;
+var projectile;
 
 const gameStates = {
     START: 'start',
     PLAY: 'play',
     END: 'end'
 };
-
 var gameState = gameStates.START;
 PImage startImage;
 PImage endImage;
@@ -34,7 +34,7 @@ void setup() {
   platforms.push(new Platform(400, 400, 30, 5));
 
   spike = new Spike(loadImage("Spikes.png"), 530, FLOOR);
-  projectile = new Projectile(loadImage("fireball.png") MARGIN, 400);
+  projectile = new Projectile(loadImage("fireball.png"), SCREEN_WIDTH, 400);
 }
 
 void draw() {
@@ -72,20 +72,12 @@ function calculate() {
   calculateProjectile(projectile);
 }
 
-void keyPressed() {
-  if (gameState == gameStates.START) {
-    gameState = gameStates.PLAY;
-  }
-  playerMovementPress(keyCode, player, platforms, MARGIN, SCREEN_WIDTH, FLOOR);
-}
-
-void keyReleased() {
-  playerMovementRelease(keyCode, player, MARGIN, SCREEN_WIDTH, FLOOR);
-}
-
-void mouseClicked() {
-  if (gameState == gameStates.START) {
-    gameState = gameStates.PLAY;
+function calculateProjectile(projectile) {
+  if (isCollide(player, projectile)) {
+    player.x = 10;
+    player.y = FLOOR;
+    endCounter = 50;
+    gameState = gameStates.END;
   }
 }
 
@@ -94,15 +86,6 @@ function calculateSpike(spike) {
   if (isCollide(player, spike)) {
     console.log(spike.x + " " + spike.y + " " +
       spike.width + " " + spike.height);
-    player.x = 10;
-    player.y = FLOOR;
-    endCounter = 50;
-    gameState = gameStates.END;
-  }
-}
-
-function calculateProjectile(projectile) {
-  if (isCollide(player, spike)) {
     player.x = 10;
     player.y = FLOOR;
     endCounter = 50;

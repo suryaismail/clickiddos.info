@@ -2,10 +2,15 @@ var Speed = 10;
 
 function Projectile(pImage, x, y) {
   this.pImage = pImage;
+  this.startX = x;
   GameObject.call(this, x, y - pImage.height, pImage.width, pImage.height);
 
   this.draw = function () {
-    image(this.pImage, this.x - Speed, this.y);
+    this.x -= Speed;
+    if (this.x < 0) {
+      this.x = this.startX;
+    }
+    image(this.pImage, this.x, this.y);
   }
 }
-Spike.prototype = Object.create(GameObject.prototype);
+Projectile.prototype = Object.create(GameObject.prototype);
