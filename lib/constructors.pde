@@ -65,7 +65,6 @@ function Platform(x, y, width, height) {
   GameObject.call(this, x, y, width, (height <= GRAVITY_STEP) ? this.height = GRAVITY_STEP + 1 : height);
 
   this.draw = function () {
-    fill(0, 125, 125);
     rect(x, y, width, height);
   }
 
