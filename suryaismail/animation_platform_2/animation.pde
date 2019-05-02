@@ -7,7 +7,6 @@ var MARGIN = 10;
 
 var FLOOR = screenHeight - 40;
 var PLAYER_STEP = 7;
-var GRAVITY_STEP = 2;
 
 var JUMP_STEP = 2;
 var JUMP_HEIGHT = 35;
@@ -20,7 +19,7 @@ var platform0, platform1, platform2;
 void setup() {
   size(screenWidth, screenHeight);
   background(255, 255, 255);
-  fill(255, 255, 255);
+  fill(125, 125, 125);
   noStroke();
 
   player = new Player(loadImage("StickMan.png"), 10, FLOOR)

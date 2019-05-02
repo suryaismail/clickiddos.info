@@ -2,7 +2,7 @@ var screenWidth = 1350;
 var screenHeight = 635;
 
 var manX = 0;// 650;
-var manY = 400; //600;
+var manY = 470; //600;
 var amJumping = false;
 var right1 = true;
 var left1 = false;
@@ -28,7 +28,7 @@ void setup() {
   Right[3] = loadImage("ninR4.png");
   Right[4] = loadImage("ninR5.png");
   ninJump = loadImage("NinjaJ.png");
-  bgImage = loadImage("wall.png");
+  bgImage = loadImage("newBackground.png");
 }
 
 var jumpCounter = 0;
@@ -76,10 +76,10 @@ void makeManStep() {
 
 
 void keyPressed() {
-  var LEFT = 37,
-      UP = 38,
-      RIGHT = 39,
-      DOWN = 40,
+  var LEFT = 65,
+      UP = 87,
+      RIGHT = 68,
+      DOWN = 83,
       SPACE = 32;
 
   switch (keyCode) {
