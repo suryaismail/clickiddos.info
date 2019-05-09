@@ -32,10 +32,6 @@ function Player(pImage, x, y) {
 }
 Player.prototype = Object.create(GameObject.prototype);
 
-void keyPressed() {
-
-}
-
 //Player movement key press
 void keyPressed() {
   for (var i = 0; i < platforms.length; i++) {
@@ -65,6 +61,9 @@ void keyPressed() {
 }
 
 void keyReleased() {
+  if (gameState == gameStates.START) {
+    gameState = gameStates.PLAY;
+  }
     switch (keyCode) {
       case LEFT:
           player.movement.movingLeft = false;
@@ -77,6 +76,12 @@ void keyReleased() {
       default:
           break;
     }
+}
+
+void mouseClicked() {
+  if (gameState == gameStates.START) {
+    gameState = gameStates.PLAY;
+  }
 }
 
 //Player stop jump
