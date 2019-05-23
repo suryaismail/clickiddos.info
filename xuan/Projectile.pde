@@ -1,4 +1,4 @@
-var Speed = 10;
+var Speed = 5;
 
 function Projectile(pImage, x, y) {
   this.pImage = pImage;

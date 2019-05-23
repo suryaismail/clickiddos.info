@@ -1,5 +1,4 @@
 /* @pjs preload="StickMan.png","Spikes.png","fireball.png","Start.png","End.png"; */
-
 var FLOOR;
 
 var player;
@@ -36,6 +35,7 @@ void setup() {
 }
 
 void draw() {
+    console.log("good");
   if (gameState == gameStates.START) {
     background(255, 255, 255);
     image(startImage, 100, 100);
@@ -53,7 +53,7 @@ void draw() {
   }
 
   calculate();
-
+  console.log("good");
   background(255, 255, 255);
   drawPlatforms(platforms);
   projectile.draw();
