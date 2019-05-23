@@ -53,12 +53,12 @@ function calculatePlatform(platform) {
     // If player bumps from the left
     if (player.midX() < platform.midX()) {
       var startX = player.x
-      player.x = player.x - player.movement.moveSpeed;
+      player.x = player.x - player.playerMovement.moveSpeed;
       return
     } else {
       // If player bumps from the right
       var startX = player.x
-      player.x = player.x + player.movement.moveSpeed;
+      player.x = player.x + player.playerMovement.moveSpeed;
     }
   }
 }
