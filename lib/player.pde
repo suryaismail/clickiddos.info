@@ -1,8 +1,8 @@
 var LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40, SPACE = 32;
 var playerIsOnPlatform = false;
 
-// Player movement
-function Movement(moveSpeed) {
+// Player movement states and attributes
+function PlayerMovement(moveSpeed) {
   this.movingLeft = false;
   this.movingRight = false;
   this.movingUp = false;
@@ -10,7 +10,7 @@ function Movement(moveSpeed) {
   this.moveSpeed = moveSpeed;
 }
 
-// Player jumping
+// Player jumping states and attributes
 function Jump(jumpSpeed, jumpDura, jumpStepCount) {
   this.jumping = false;
   this.jumpSpeed = jumpSpeed;
@@ -23,7 +23,7 @@ function Player(pImage, x, y) {
   this.pImage = pImage;
   GameObject.call(this, x, y - pImage.height, pImage.width, pImage.height);
 
-  this.movement = new Movement(7);
+  this.movement = new PlayerMovement(7);
   this.jump = new Jump(5, 35, 0);
 
   this.draw = function () {
@@ -34,10 +34,17 @@ Player.prototype = Object.create(GameObject.prototype);
 
 //Player movement key press
 void keyPressed() {
+  if (gameState == gameStates.START) {
+    gameState = gameStates.PLAY;
+  }
+
   for (var i = 0; i < platforms.length; i++) {
     if (isCollide(player, platforms[i])) {
       playerIsOnPlatform = true;
       break;
+    }
+    else {
+      playerIsOnPlatform = false;
     }
   }
   switch (keyCode) {

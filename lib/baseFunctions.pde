@@ -19,23 +19,25 @@ function calculateGravity() {
 function GameObject(x, y, width, height) {
   this.x = x;
   this.y = y;
+  this.originX = x;
+  this.originY = y;
   this.width = width;
   this.height = height;
 }
 
-GameObject.prototype.top = function() {return this.y}
-GameObject.prototype.bottom = function() {return this.y + this.height }
-GameObject.prototype.left = function() {return this.x }
-GameObject.prototype.right = function() {return this.x + this.width }
-GameObject.prototype.midY = function() {return this.y + (this.height / 2) }
-GameObject.prototype.midX = function() {return this.x + (this.width / 2) }
+GameObject.prototype.top = function() {return this.y};
+GameObject.prototype.bottom = function() {return this.y + this.height};
+GameObject.prototype.left = function() {return this.x};
+GameObject.prototype.right = function() {return this.x + this.width};
+GameObject.prototype.midY = function() {return this.y + (this.height / 2) };
+GameObject.prototype.midX = function() {return this.x + (this.width / 2) };
 
 GameObject.prototype.setBottomTo = function (bottom) {
   this.y = bottom - this.height;
-}
+};
 GameObject.prototype.setRightTo = function (right) {
   this.x = right - this.width;
-}
+};
 
 
 //Collision
