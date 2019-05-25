@@ -50,7 +50,7 @@ function PlatformMovement(thisPlatform) {
                       top: 0,
                       bottom: 0};
 
-  this.setup = function(steps, directions, speed, finalStep) {
+  this.setup = function(steps, directions, speed) {
     if (steps.length != directions.length) {
       return;
     }
@@ -63,7 +63,6 @@ function PlatformMovement(thisPlatform) {
     this.steps = steps;
     this.directions = directions;
     this.speed = speed;
-    this.finalStep = finalStep;
   }
 
   this.loop = function() {
