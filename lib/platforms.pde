@@ -40,6 +40,7 @@ function calculatePlatform(platform) {
       // If player head touch the platform, stop him from going up
       if ((platform.top() <= player.top()) && (player.top() <= platform.bottom())) {
         player.y = platform.bottom();
+        headBump = true;
         stopJump();
         headBump = true;
       }
@@ -52,18 +53,24 @@ function calculatePlatform(platform) {
       player.setBottomTo(platform.top());
       return
     }
+
     if (headBump) {
       return;
     }
+
     // If player bumps from the left
     if (player.midX() < platform.midX()) {
       var startX = player.x
-      player.x = player.x - player.playerMovement.moveSpeed;
+      if (player.x > MARGIN) {
+          player.x = player.x - player.movement.moveSpeed;
+      }
       return
     } else {
       // If player bumps from the right
       var startX = player.x
-      player.x = player.x + player.playerMovement.moveSpeed;
+      if (player.right() < SCREEN_WIDTH - MARGIN) {
+          player.x = player.x + player.movement.moveSpeed;
+      }
     }
   }
 }

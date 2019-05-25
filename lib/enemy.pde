@@ -19,7 +19,7 @@ function enemyMovement(moveSpeed) {
   this.moveSpeed = moveSpeed;
 }
 
-//All player movement
+//All enemy movement
 function calculateEnemyMovement() {
   if (enemy.enemyMovement.movingLeft) {
     enemy.x -= enemy.enemyMovement.moveSpeed;
@@ -30,15 +30,24 @@ function calculateEnemyMovement() {
   }
 }
 
+//Decides where to stop. Left and right
 function calculateEnemyBoundaries() {
   if (enemy.x <= enemy.leftBound) {
     enemy.enemyMovement.movingLeft = false;
     enemy.enemyMovement.movingRight = true;
-    console.log(enemy.enemyMovement.movingRight);
   }
 
   if (enemy.x >= enemy.rightBound) {
     enemy.enemyMovement.movingLeft = true;
     enemy.enemyMovement.movingRight = false;
   }
+}
+
+//If player collides with enemy, change game state to Loss
+function enemyCollision() {
+  if isCollide(player, enemy) {
+    currGameState = gameStates[1];
+    console.log(currGameState);
+  }
+
 }
