@@ -1,4 +1,3 @@
-var LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40, SPACE = 32;
 var playerIsOnPlatform = false;
 
 // Player movement
@@ -33,7 +32,13 @@ function Player(pImage, x, y) {
 Player.prototype = Object.create(GameObject.prototype);
 
 //Player movement key press
+var LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40, SPACE = 32;
 void keyPressed() {
+  /*
+  if (gameState == gameStates.START) {
+    gameState = gameStates.PLAY;
+  }
+  */
   for (var i = 0; i < platforms.length; i++) {
     if (isCollide(player, platforms[i])) {
       playerIsOnPlatform = true;

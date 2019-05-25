@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 // Platform movement functions
 function PlatformMovement(thisPlatform) {
   this.left = function(px) {
@@ -130,27 +130,27 @@ function PlatformMovement(thisPlatform) {
   }
 }
 
-=======
->>>>>>> dbf0a22bae4f11fba2497cffc6583a799441bf8e
 // Platforms
 function Platform(x, y, width, height) {
   GameObject.call(this, x, y, width, (height <= GRAVITY_STEP) ? this.height = GRAVITY_STEP + 1 : height);
 
   this.playerIsOnPlatform = function () {
-    if ((isCollide(player, this)) && ((platform.top() <= player.bottom()) && (player.bottom() <= platform.bottom()))) {
+    if ((isCollide(player, this)) && ((this.top() <= player.bottom()) && (player.bottom() <= this.bottom()))) {
       return true;
     }
     else {
       return false;
     }
   }
+  this.movePixels = new PlatformMovement(this);
 
   this.draw = function () {
-    rect(x, y, width, height);
+    rect(this.x, this.y, this.width, this.height);
   }
 
 }
 Platform.prototype = Object.create(GameObject.prototype);
+Platform.prototype.movePixels = new PlatformMovement();
 
 //Calcualte platforms
 function calculatePlatforms(platforms) {
@@ -174,7 +174,6 @@ function calculatePlatform(platform) {
       // If player head touch the platform, stop him from going up
       if ((platform.top() <= player.top()) && (player.top() <= platform.bottom())) {
         player.y = platform.bottom();
-        headBump = true;
         stopJump();
         headBump = true;
       }
@@ -196,14 +195,14 @@ function calculatePlatform(platform) {
     if (player.midX() < platform.midX()) {
       var startX = player.x
       if (player.x > MARGIN) {
-          player.x = player.x - player.movement.moveSpeed;
+          player.x = player.x - player.playerMovement.moveSpeed;
       }
       return
     } else {
       // If player bumps from the right
       var startX = player.x
       if (player.right() < SCREEN_WIDTH - MARGIN) {
-          player.x = player.x + player.movement.moveSpeed;
+          player.x = player.x + player.playerMovement.moveSpeed;
       }
     }
   }

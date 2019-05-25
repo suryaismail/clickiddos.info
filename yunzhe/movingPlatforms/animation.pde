@@ -69,6 +69,16 @@ function calculate() {
     calculatePlatforms(platforms);
 }
 
+function calculateMovement() {
+    if ((player.playerMovement.movingLeft) && (player.x > MARGIN)) {
+      player.x -= player.playerMovement.moveSpeed;
+    }
+
+    if ((player.playerMovement.movingRight) && (player.right() < SCREEN_WIDTH - MARGIN)) {
+      player.x += player.playerMovement.moveSpeed;
+    }
+}
+
 function platformMovement1(platform) {
   if (platform.left() == 300 && platform.right() == 450) {
     toTG = true;
@@ -107,5 +117,11 @@ function platformMovement4(platform, steps, directions, speed, finalStep) {
   }
   if (toOG) {
     platform.movePixels.right(5);
+  }
+}
+
+void mouseClicked() {
+  if (gameState == gameStates.START) {
+    gameState = gameStates.PLAY;
   }
 }
