@@ -1,8 +1,8 @@
 var LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40, SPACE = 32;
 var playerIsOnPlatform = false;
 
-// Player movement states and attributes
-function PlayerMovement(moveSpeed) {
+// Player movement
+function playerMovement(moveSpeed) {
   this.movingLeft = false;
   this.movingRight = false;
   this.movingUp = false;
@@ -10,7 +10,7 @@ function PlayerMovement(moveSpeed) {
   this.moveSpeed = moveSpeed;
 }
 
-// Player jumping states and attributes
+// Player jumping
 function Jump(jumpSpeed, jumpDura, jumpStepCount) {
   this.jumping = false;
   this.jumpSpeed = jumpSpeed;
@@ -23,7 +23,7 @@ function Player(pImage, x, y) {
   this.pImage = pImage;
   GameObject.call(this, x, y - pImage.height, pImage.width, pImage.height);
 
-  this.movement = new PlayerMovement(7);
+  this.playerMovement = new playerMovement(7);
   this.jump = new Jump(5, 35, 0);
 
   this.draw = function () {
@@ -34,30 +34,25 @@ Player.prototype = Object.create(GameObject.prototype);
 
 //Player movement key press
 void keyPressed() {
-  if (gameState == gameStates.START) {
-    gameState = gameStates.PLAY;
-  }
-
   for (var i = 0; i < platforms.length; i++) {
     if (isCollide(player, platforms[i])) {
       playerIsOnPlatform = true;
       break;
-    }
-    else {
+    } else {
       playerIsOnPlatform = false;
     }
   }
   switch (keyCode) {
     case LEFT:
-        player.movement.movingLeft = true;
+        player.playerMovement.movingLeft = true;
         break;
 
     case RIGHT:
-        player.movement.movingRight = true;
+        player.playerMovement.movingRight = true;
         break;
 
     case SPACE:
-        if ((player.bottom() == FLOOR) || playerIsOnPlatform) {
+        if ((player.bottom() == FLOOR) ||  playerIsOnPlatform) {
           player.jump.jumping = true;
         }
         break;
@@ -68,27 +63,18 @@ void keyPressed() {
 }
 
 void keyReleased() {
-  if (gameState == gameStates.START) {
-    gameState = gameStates.PLAY;
-  }
     switch (keyCode) {
       case LEFT:
-          player.movement.movingLeft = false;
+          player.playerMovement.movingLeft = false;
           break;
 
       case RIGHT:
-          player.movement.movingRight = false;
+          player.playerMovement.movingRight = false;
           break;
 
       default:
           break;
     }
-}
-
-void mouseClicked() {
-  if (gameState == gameStates.START) {
-    gameState = gameStates.PLAY;
-  }
 }
 
 //Player stop jump
@@ -110,12 +96,12 @@ function calculateJump() {
 }
 
 //All player movement
-function calculateMovement() {
-    if ((player.movement.movingLeft) && (player.x > MARGIN)) {
-      player.x -= player.movement.moveSpeed;
+function calculatePlayerMovement() {
+    if ((player.playerMovement.movingLeft) && (player.x > MARGIN)) {
+      player.x -= player.playerMovement.moveSpeed;
     }
 
-    if ((player.movement.movingRight) && (player.right() < SCREEN_WIDTH - MARGIN)) {
-      player.x += player.movement.moveSpeed;
+    if ((player.playerMovement.movingRight) && (player.right() < SCREEN_WIDTH - MARGIN)) {
+      player.x += player.playerMovement.moveSpeed;
     }
 }

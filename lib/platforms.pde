@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Platform movement functions
 function PlatformMovement(thisPlatform) {
   this.left = function(px) {
@@ -129,12 +130,14 @@ function PlatformMovement(thisPlatform) {
   }
 }
 
+=======
+>>>>>>> dbf0a22bae4f11fba2497cffc6583a799441bf8e
 // Platforms
 function Platform(x, y, width, height) {
   GameObject.call(this, x, y, width, (height <= GRAVITY_STEP) ? this.height = GRAVITY_STEP + 1 : height);
 
   this.playerIsOnPlatform = function () {
-    if ((isCollide(player, this)) && ((this.top() <= player.bottom()) && (player.bottom() <= this.bottom()))) {
+    if ((isCollide(player, this)) && ((platform.top() <= player.bottom()) && (player.bottom() <= platform.bottom()))) {
       return true;
     }
     else {
@@ -142,14 +145,12 @@ function Platform(x, y, width, height) {
     }
   }
 
-  this.movePixels = new PlatformMovement(this);
-
   this.draw = function () {
-    rect(this.x, this.y, this.width, this.height);
+    rect(x, y, width, height);
   }
+
 }
 Platform.prototype = Object.create(GameObject.prototype);
-//Platform.prototype.movePixels = new PlatformMovement();
 
 //Calcualte platforms
 function calculatePlatforms(platforms) {
@@ -175,6 +176,7 @@ function calculatePlatform(platform) {
         player.y = platform.bottom();
         headBump = true;
         stopJump();
+        headBump = true;
       }
     }
   }
