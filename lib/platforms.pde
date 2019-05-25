@@ -34,12 +34,14 @@ function drawPlatforms(platforms) {
 
 // Platform functions
 function calculatePlatform(platform) {
+  var headBump = false;
   if (player.jump.jumping) {
     if (isCollide(player, platform)) {
       // If player head touch the platform, stop him from going up
       if ((platform.top() <= player.top()) && (player.top() <= platform.bottom())) {
         player.y = platform.bottom();
         stopJump();
+        headBump = true;
       }
     }
   }
@@ -49,6 +51,9 @@ function calculatePlatform(platform) {
     if ((platform.top() <= player.bottom()) && (player.bottom() <= platform.bottom())) {
       player.setBottomTo(platform.top());
       return
+    }
+    if (headBump) {
+      return;
     }
     // If player bumps from the left
     if (player.midX() < platform.midX()) {
