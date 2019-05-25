@@ -46,8 +46,6 @@ function calculateEnemyBoundaries() {
 //If player collides with enemy, change game state to Loss
 function enemyCollision() {
   if (isCollide(player, enemy)) {
-    currGameState = gameStates[1];
-    console.log(currGameState);
+    currGameState = gameStates.LOSS;
   }
-
 }
