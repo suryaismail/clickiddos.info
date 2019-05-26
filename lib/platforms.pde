@@ -164,7 +164,6 @@ function Platform(x, y, width, height) {
 
   this.playerIsOnPlatform = function () {
     if ((isCollide(player, this)) && ((this.top() <= player.bottom()) && (player.bottom() <= this.bottom()))) {
-      console.log("ON");
       return true;
     }
     else {
