@@ -33,7 +33,7 @@ void setup() {
   platforms.push(new Platform(100, 370, 100, 5));
   platforms.push(new Platform(200, 350, 150, 5));
   platforms.push(new Platform(400, 400, 30, 5));
-  platforms[1].movePixels.setup([40, 40, 120, 40, 80], ["L", "U", "R", "D", "L"], 5, 1);
+  platforms[1].movePixels.setup([40, 40, 120, 40, 80], ["L", "U", "R", "D", "L"], 5);
 }
 
 void draw() {
@@ -62,62 +62,11 @@ void draw() {
 }
 
 function calculate() {
-    platforms[1].movePixels.loop();
-    calculateMovement();
+    loopPlatforms(platforms);
+    calculatePlayerMovement();
     calculateJump();
     calculateGravity();
     calculatePlatforms(platforms);
-}
-
-function calculateMovement() {
-    if ((player.playerMovement.movingLeft) && (player.x > MARGIN)) {
-      player.x -= player.playerMovement.moveSpeed;
-    }
-
-    if ((player.playerMovement.movingRight) && (player.right() < SCREEN_WIDTH - MARGIN)) {
-      player.x += player.playerMovement.moveSpeed;
-    }
-}
-
-function platformMovement1(platform) {
-  if (platform.left() == 300 && platform.right() == 450) {
-    toTG = true;
-    toOG = false;
-  }
-  if (platform.left() == 100 && platform.right() == 250) {
-    toOG = true;
-    toTG = false;
-  }
-  if (toTG) {
-    //platform.movePixels.left(5);
-  }
-  if (toOG) {
-    //platform.movePixels.right(5);
-  }
-}
-
-var currentStep = 1;
-function platformMovement4(platform, steps, directions, speed, finalStep) {
-  if (steps.length != directions.length) {
-    return;
-  }
-
-  //if ((directions[currentStep] == "L") && (platform.left() == platform.x - steps[currentStep] && )) {
-  //}
-  if (platform.left() == 300 && platform.right() == 450) {
-    toTG = true;
-    toOG = false;
-  }
-  if (platform.left() == 100 && platform.right() == 250) {
-    toOG = true;
-    toTG = false;
-  }
-  if (toTG) {
-    platform.movePixels.left(5);
-  }
-  if (toOG) {
-    platform.movePixels.right(5);
-  }
 }
 
 void mouseClicked() {
