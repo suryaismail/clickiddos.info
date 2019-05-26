@@ -2,6 +2,8 @@ var GRAVITY_STEP = 5;
 var SCREEN_WIDTH = 800;
 var SCREEN_HEIGHT = 600;
 var MARGIN = 10;
+var FLOOR;
+
 //Not sure if we need a pause statement. If we don't, then this should be change to true/false.
 var gameStates = {
   LEVEL_END: 1,
@@ -12,13 +14,14 @@ var gameStates = {
   PLAYING: 6
 }
 
-var currGameState = gameStates.PLAYING;
+var currGameState = gameStates.START;
 
 //Gravity
-function calculateGravity() {
+function calculateGravity(platforms) {
   if (player.jump.jumping) {
     return;
   }
+
   if (player.bottom() > FLOOR) {
     player.setBottomTo(FLOOR);
   } else if (player.bottom() < FLOOR) {

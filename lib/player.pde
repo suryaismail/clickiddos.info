@@ -36,7 +36,7 @@ var LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40, SPACE = 32;
 void keyPressed() {
   /*
   if (gameState == gameStates.START) {
-    gameState = gameStates.PLAY;
+    gameState = gameStates.PLAYING;
   }
   */
   for (var i = 0; i < platforms.length; i++) {

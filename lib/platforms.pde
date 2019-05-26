@@ -160,10 +160,11 @@ function PlatformMovement(thisPlatform) {
 
 // Platforms
 function Platform(x, y, width, height) {
-  GameObject.call(this, x, y, width, (height <= GRAVITY_STEP) ? this.height = GRAVITY_STEP + 1 : height);
+  GameObject.call(this, x, y, width, height);
 
   this.playerIsOnPlatform = function () {
     if ((isCollide(player, this)) && ((this.top() <= player.bottom()) && (player.bottom() <= this.bottom()))) {
+      console.log("ON");
       return true;
     }
     else {

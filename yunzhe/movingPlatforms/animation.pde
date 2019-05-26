@@ -1,19 +1,9 @@
 
 /* @pjs preload="StickMan.png"; */
 
-var FLOOR;
-
 var player;
 var platforms = new Array();
-var toTG = true, toOG = false;
 
-const gameStates = {
-    START: 'start',
-    PLAY: 'play',
-    END: 'end'
-};
-
-var gameState = gameStates.START;
 PImage startImage;
 PImage endImage;
 var endCounter = 0;
@@ -37,18 +27,18 @@ void setup() {
 }
 
 void draw() {
-  if (gameState == gameStates.START) {
+  if (currGameState == gameStates.START) {
     background(255, 255, 255);
     image(startImage, 100, 100);
     return;
   }
   // Oo, we died, so punish the player a bit
-  if (gameState == gameStates.END) {
+  if (currGameState == gameStates.END) {
     background(255, 255, 255);
     image(endImage, 100, 200);
     endCounter -= 1;
     if (endCounter <= 0) {
-      gameState = gameStates.PLAY;
+      currGameState = gameStates.PLAYING;
     }
     return;
   }
@@ -70,7 +60,7 @@ function calculate() {
 }
 
 void mouseClicked() {
-  if (gameState == gameStates.START) {
-    gameState = gameStates.PLAY;
+  if (currGameState == gameStates.START) {
+    currGameState = gameStates.PLAYING;
   }
 }
