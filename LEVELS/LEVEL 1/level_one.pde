@@ -1,4 +1,4 @@
-/* @pjs preload="../assets/wizard/wizardRight.png", "../assets/SmallFoes/SmallFoe.png"; */
+/* @pjs preload="wizardRight.png"; */
 
 var FLOOR;
 var platforms = new Array();
