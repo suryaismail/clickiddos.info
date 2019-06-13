@@ -1,9 +1,9 @@
 //Enemy
-function Enemy(pImage, x, y, rightBound, leftBound) {
+function Enemy(pImage, x, y, rightBound, leftBound, speed) {
   this.pImage = pImage;
   this.rightBound = rightBound;
   this.leftBound = leftBound;
-  this.enemyMovement = new enemyMovement(3);
+  this.enemyMovement = new enemyMovement(speed);
 
   GameObject.call(this, x, y - pImage.height, pImage.width, pImage.height);
   this.draw = function () {

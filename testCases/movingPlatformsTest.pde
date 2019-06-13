@@ -36,8 +36,7 @@ void draw() {
 
 function calculate() {
     calculatePlayerMovement();
-    platforms[0].movePixels.loop();
-    platforms[1].movePixels.loop();
+    loopPlatforms(platforms);
     calculateJump();
     calculateGravity();
     calculatePlatforms(platforms);
