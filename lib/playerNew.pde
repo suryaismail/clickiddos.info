@@ -19,7 +19,7 @@ function Jump(jumpSpeed, jumpDura, jumpStepCount) {
 }
 
 // Player
-function Player(right, left, jump, x, y) {
+function Player(right, left, jump, idle, x, y) {
 
   GameObject.call(this, x, y - playerRight[0].height, playerRight[0].width, playerRight[0].height);
 
@@ -49,7 +49,7 @@ function Player(right, left, jump, x, y) {
 
     //the jump image below should be a idle image
     if (player.bottom() == FLOOR || playerIsOnPlatform) {
-      this.pImage = jump;
+      this.pImage = idle;
     }
 
     if (this.playerMovement.movingLeft) {
