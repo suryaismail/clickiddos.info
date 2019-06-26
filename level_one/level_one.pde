@@ -7,13 +7,16 @@ PImage bg;
 var player;
 var enemy;
 var platform;
+var playerImages = [];
 
 void setup() {
   FLOOR = SCREEN_HEIGHT;
   size(SCREEN_WIDTH, SCREEN_HEIGHT);
   fill(0, 0, 0);
 
-  player = new Player(loadImage("../assets/wizard/wizardRight.png"), 10, FLOOR);
+  playerImages[0] = loadImage("../assets/wizard/wizardRight.png");
+  player = new Player(playerImages, playerImages,
+    playerImages[0], playerImages[0], 10, FLOOR);
   enemy = new Enemy(loadImage("../assets/SmallFoes/SmallFoe.png"), 400, FLOOR, 500, 300, 3)
   platforms.push(new Platform(400, 500, 137, 27));
   bg = loadImage("../assets/background/bigRockTheBackground.png");

@@ -1,28 +1,8 @@
-<<<<<<< HEAD
-/* @pjs preload="../../assets/wizard/wizardRight.png", "1stLevelBackground.png"; */
-
-=======
 /* @pjs preload="../../assets/ninja/ninjaStanding.png", "../../assets/ninja/ninjaJump.png","../../assets/ninja/ninjaL5.png","../../assets/ninja/ninjaL4.png", "../../assets/ninja/ninjaL3.png", "../../assets/ninja/ninjaL2.png", "../../assets/ninja/ninjaL1.png","../../assets/background/1stLevelBackground.png", "../../assets/ninja/ninjaR5.png", "../../assets/ninja/ninjaR4.png", "../../assets/ninja/ninjaR3.png", "../../assets/ninja/ninjaR2.png", "../../assets/ninja/ninjaR1.png"; */
->>>>>>> backend-stuff
 var FLOOR;
 var platforms = new Array();
 PImage bg;
 
-<<<<<<< HEAD
-var player;
-var enemy;
-var platform;
-
-void setup() {
-  console.log("HEll0o");
-  FLOOR = SCREEN_HEIGHT;
-  size(SCREEN_WIDTH, SCREEN_HEIGHT);
-  fill(0, 0, 0);
-
-  player = new Player(loadImage("../../assets/wizard/wizardRight.png"), 10, FLOOR);
-  platforms.push(new Platform(400, 500, 137, 27));
-  bg = loadImage("1stLevelBackground.png");
-=======
 var playerRight = [];
 var playerLeft = [];
 var playerJump;
@@ -54,7 +34,6 @@ void setup() {
   bg = loadImage("../../assets/background/1stLevelBackground.png");
 
   //console.log(FLOOR);
->>>>>>> backend-stuff
 }
 
 void draw() {

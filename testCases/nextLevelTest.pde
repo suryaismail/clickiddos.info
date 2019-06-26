@@ -5,13 +5,16 @@ var player;
 var door;
 var enemy;
 var platform;
+var playerImages = [];
 
 void setup() {
   currGameState = gameStates.PLAYING;
   FLOOR = SCREEN_HEIGHT;
   size(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-  player = new Player(loadImage("../assets/wizard/wizardRight.png"), 10, FLOOR);
+  playerImages[0] = loadImage("../assets/wizard/wizardRight.png");
+  player = new Player(playerImages, playerImages,
+    playerImages[0], playerImages[0], 10, FLOOR);
   door = new Door(150, 40, 40, 60);
   enemy = new Enemy(loadImage("../assets/SmallFoes/SmallFoe2.png"), 400, FLOOR, 500, 400, 3);
 

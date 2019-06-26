@@ -19,12 +19,18 @@ function Jump(jumpSpeed, jumpDura, jumpStepCount) {
 }
 
 // Player
-function Player(right, left, jump, idle, x, y) {
-  GameObject.call(this, x, y - playerRight[0].height, playerRight[0].width, playerRight[0].height);
+function Player(rightImages, leftImages, jumpImage, idleImage, x, y) {
+  this.rightImages = rightImages;
+  this.leftImages = leftImages;
+  this.jumpImage = jumpImage;
+  this.idleImage = idleImage;
+
+  GameObject.call(this, x, y - this.rightImages[0].height,
+    this.rightImages[0].width, this.rightImages[0].height);
 
   this.playerMovement = new playerMovement(7);
   this.jump = new Jump(5, 35, 0);
-  this.pImage = playerRight[0];
+  this.pImage = this.rightImages[0];
   this.framesLeft = 0;
   this.framesRight = 0;
   this.imageStep = 0;
@@ -41,12 +47,12 @@ function Player(right, left, jump, idle, x, y) {
     }
 
     if (this.jump.jumping) {
-      this.pImage = jump;
+      this.pImage = jumpImage;
     }
 
     //the jump image below should be a idle image
     if (player.bottom() == FLOOR || playerIsOnPlatform) {
-      this.pImage = idle;
+      this.pImage = this.idleImage;
     }
 
     if (this.playerMovement.movingLeft) {
@@ -55,7 +61,9 @@ function Player(right, left, jump, idle, x, y) {
         this.framesLeft += 1;
         this.imageStep = 0;
       }
-      this.pImage = left[this.framesLeft];
+      if (this.framesLeft < this.leftImages.length) {
+        this.pImage = this.leftImages[this.framesLeft];
+      }
     }
 
     else if (this.playerMovement.movingRight) {
@@ -64,14 +72,16 @@ function Player(right, left, jump, idle, x, y) {
         this.framesRight += 1;
         this.imageStep = 0;
       }
-      this.pImage = right[this.framesRight];
+      if (this.framesRight < this.rightImages.length) {
+        this.pImage = this.rightImages[this.framesRight];
+      }
     }
 
 
-    if (this.framesLeft == left.length - 1) {
+    if (this.framesLeft == this.leftImages.length - 1) {
       this.framesLeft = 0;
       }
-    if (this.framesRight == right.length - 1) {
+    if (this.framesRight == this.rightImages.length - 1) {
       this.framesRight = 0;
       }
 
@@ -125,13 +135,13 @@ void keyReleased() {
     }
 }
 
-//Player stop jump
+//Player stop jumpImages
 function stopJump() {
   player.jump.jumping = false;
   player.jump.jumpStepCount = 0;
 }
 
-//Player calculate jump
+//Player calculate jumpImages
 function calculateJump() {
     if (player.jump.jumping) {
       player.jump.jumpStepCount += 1;

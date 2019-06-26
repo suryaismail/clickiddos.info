@@ -7,6 +7,7 @@ var platforms = new Array();
 PImage startImage;
 PImage endImage;
 var endCounter = 0;
+var playerImages = [];
 PImage bg;
 
 void setup() {
@@ -18,7 +19,9 @@ void setup() {
   startImage = loadImage("Start.png");
   endImage = loadImage("End.png");
 
-  player = new Player(loadImage("StickMan.png"), 10, FLOOR);
+  playerImages[0] = loadImage("StickMan.png");
+  player = new Player(playerImages, playerImages,
+    playerImages[0], playerImages[0], 10, FLOOR);
 
   platforms.push(new Platform(100, 370, 100, 5));
   platforms.push(new Platform(200, 350, 150, 5));

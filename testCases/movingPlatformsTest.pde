@@ -4,13 +4,16 @@ var platforms = new Array();
 var player;
 var door;
 var platform;
+var playerImages = [];
 
 void setup() {
   currGameState = gameStates.PLAYING;
   FLOOR = SCREEN_HEIGHT;
   size(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-  player = new Player(loadImage("../assets/wizard/wizardRight.png"), 10, FLOOR);
+  playerImages[0] = loadImage("../assets/wizard/wizardRight.png");
+  player = new Player(playerImages, playerImages,
+    playerImages[0], playerImages[0], 10, FLOOR);
   door = new Door(150, 40, 40, 60);
 
   //moving platforms
