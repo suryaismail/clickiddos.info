@@ -1,4 +1,4 @@
-/* @pjs preload="../assets/wizard/wizardRight.png", "../assets/SmallFoes/SmallFoe.png"; */
+/* @pjs preload="wizardRight.png"; */
 
 var FLOOR;
 var platforms = new Array();
@@ -13,9 +13,9 @@ void setup() {
   size(SCREEN_WIDTH, SCREEN_HEIGHT);
   fill(0, 0, 0);
 
-  player = new Player(loadImage("../assets/wizard/wizardRight.png"), 10, FLOOR);
+  player = new Player(loadImage("../../assets/wizard/wizardRight.png"), 10, FLOOR);
   platforms.push(new Platform(400, 500, 137, 27));
-  bg = loadImage("");
+  bg = loadImage("1stLevelBackground.png");
 
   console.log(FLOOR);
 }
