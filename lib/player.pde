@@ -19,14 +19,62 @@ function Jump(jumpSpeed, jumpDura, jumpStepCount) {
 }
 
 // Player
-function Player(pImage, x, y) {
-  this.pImage = pImage;
-  GameObject.call(this, x, y - pImage.height, pImage.width, pImage.height);
+function Player(right, left, jump, idle, x, y) {
+  GameObject.call(this, x, y - playerRight[0].height, playerRight[0].width, playerRight[0].height);
 
   this.playerMovement = new playerMovement(7);
   this.jump = new Jump(5, 35, 0);
+  this.pImage = playerRight[0];
+  this.framesLeft = 0;
+  this.framesRight = 0;
+  this.imageStep = 0;
+  this.imageDuration = 2;
 
   this.draw = function () {
+    for (var i = 0; i < platforms.length; i++) {
+      if (isCollide(player, platforms[i])) {
+        playerIsOnPlatform = true;
+        break;
+      } else {
+        playerIsOnPlatform = false;
+      }
+    }
+
+    if (this.jump.jumping) {
+      this.pImage = jump;
+    }
+
+    //the jump image below should be a idle image
+    if (player.bottom() == FLOOR || playerIsOnPlatform) {
+      this.pImage = idle;
+    }
+
+    if (this.playerMovement.movingLeft) {
+      this.imageStep += 1;
+      if (this.imageStep == this.imageDuration) {
+        this.framesLeft += 1;
+        this.imageStep = 0;
+      }
+      this.pImage = left[this.framesLeft];
+    }
+
+    else if (this.playerMovement.movingRight) {
+      this.imageStep += 1;
+      if (this.imageStep == this.imageDuration) {
+        this.framesRight += 1;
+        this.imageStep = 0;
+      }
+      this.pImage = right[this.framesRight];
+    }
+
+
+    if (this.framesLeft == left.length - 1) {
+      this.framesLeft = 0;
+      }
+    if (this.framesRight == right.length - 1) {
+      this.framesRight = 0;
+      }
+
     image(this.pImage, this.x, this.y);
   }
 }
@@ -38,6 +86,8 @@ void keyPressed() {
     if (isCollide(player, platforms[i])) {
       playerIsOnPlatform = true;
       break;
+    } else {
+      playerIsOnPlatform = false;
     }
   }
   switch (keyCode) {
@@ -95,7 +145,7 @@ function calculateJump() {
 
 //All player movement
 function calculatePlayerMovement() {
-    if ((player.playerMovement.movingLeft) && (player.x > MARGIN)) {
+    if ((player.playerMovement.movingLeft) && (player.x >= MARGIN)) {
       player.x -= player.playerMovement.moveSpeed;
     }
 
