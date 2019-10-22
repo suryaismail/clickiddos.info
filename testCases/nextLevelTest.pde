@@ -20,7 +20,7 @@ void setup() {
 
   //moving platforms
   platforms.push(new Platform(550, 500, 137, 27));
-  platforms[0].movePixels.setup([50, 50], ["U", "D"], 3);
+  platforms[0].movePixels.setup([100, 100], ["U", "D"], 3);
 
   platforms.push(new Platform(350, 500, 137, 27));
   platforms[1].movePixels.setup([100, 100], ["L", "R"], 3);
